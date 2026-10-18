@@ -1,0 +1,93 @@
+<!--TRADEMARK TO JUSTIN TUNGGAL-->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dashboard - Games Dojo</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="admin-shell">
+  <aside class="admin-side">
+    <div class="brand" style="display:block;margin-bottom:20px;padding:0 12px;">Games<span>Dojo</span></div>
+    <a href="#game" data-panel="game" class="active">Game</a>
+    <a href="#master" data-panel="master">Data master</a>
+    <a href="rekomendasi.html" style="margin-top:16px;border-top:1px solid var(--line);padding-top:16px;">&larr; Ke situs</a>
+  </aside>
+
+  <main class="admin-main">
+    <div id="admin-guard" class="empty-state" style="display:none;">Halaman ini khusus admin. <a href="login.html">Masuk</a> dengan akun admin.</div>
+
+    <div id="admin-body" style="display:none;">
+      <section class="admin-panel active" id="panel-game">
+        <div class="admin-toolbar"><h2 style="margin:0;">Koleksi game</h2><button class="btn btn-primary btn-sm" id="btn-add-game">+ Tambah game</button></div>
+        <div class="field" style="max-width:360px;">
+          <input type="text" id="game-search" placeholder="Cari judul, developer, atau publisher...">
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Judul</th><th>Platform</th><th>Genre</th><th>Tahun</th><th>Suka</th><th>Aksi</th></tr></thead>
+            <tbody id="game-body"><tr><td colspan="6">Memuat…</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="admin-panel" id="panel-master">
+        <div class="admin-toolbar"><h2 style="margin:0;">Data master parameter game</h2></div>
+        <p style="color:var(--text-dim);margin-top:0;">Kelola pilihan yang muncul di form game, filter pencarian, dan kuis rekomendasi. Kode dipakai sistem, jangan diubah sembarangan kalau game sudah pakai kode itu.</p>
+
+        <div class="admin-toolbar"><h3 style="margin:0;">Perangkat</h3><button class="btn btn-outline btn-sm" data-master-add="platform">+ Tambah</button></div>
+        <div class="table-wrap">
+          <table><thead><tr><th>Kode</th><th>Label</th><th>Urutan</th><th>Aksi</th></tr></thead>
+          <tbody id="master-platform-body"><tr><td colspan="4">Memuat…</td></tr></tbody></table>
+        </div>
+
+        <div class="admin-toolbar"><h3 style="margin:0;">Genre</h3><button class="btn btn-outline btn-sm" data-master-add="genre">+ Tambah</button></div>
+        <div class="table-wrap">
+          <table><thead><tr><th>Kode</th><th>Label</th><th>Urutan</th><th>Aksi</th></tr></thead>
+          <tbody id="master-genre-body"><tr><td colspan="4">Memuat…</td></tr></tbody></table>
+        </div>
+
+        <div class="admin-toolbar"><h3 style="margin:0;">Jumlah pemain</h3><button class="btn btn-outline btn-sm" data-master-add="jumlah_pemain">+ Tambah</button></div>
+        <div class="table-wrap">
+          <table><thead><tr><th>Kode</th><th>Label</th><th>Urutan</th><th>Aksi</th></tr></thead>
+          <tbody id="master-jumlah_pemain-body"><tr><td colspan="4">Memuat…</td></tr></tbody></table>
+        </div>
+
+        <div class="admin-toolbar"><h3 style="margin:0;">Mode main</h3><button class="btn btn-outline btn-sm" data-master-add="mode_main">+ Tambah</button></div>
+        <div class="table-wrap">
+          <table><thead><tr><th>Kode</th><th>Label</th><th>Urutan</th><th>Aksi</th></tr></thead>
+          <tbody id="master-mode_main-body"><tr><td colspan="4">Memuat…</td></tr></tbody></table>
+        </div>
+
+        <div class="admin-toolbar"><h3 style="margin:0;">Gaya (kuis rekomendasi)</h3><button class="btn btn-outline btn-sm" data-master-add="gaya">+ Tambah</button></div>
+        <div class="table-wrap">
+          <table><thead><tr><th>Kode</th><th>Label</th><th>Urutan</th><th>Aksi</th></tr></thead>
+          <tbody id="master-gaya-body"><tr><td colspan="4">Memuat…</td></tr></tbody></table>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<div class="modal-scrim" id="modal-scrim">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="modal-title">Form</h3>
+      <button class="modal-close" id="modal-close" aria-label="Tutup">&times;</button>
+    </div>
+    <form id="modal-form"></form>
+  </div>
+</div>
+
+<div id="toast-region" aria-live="polite"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabaseClient.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!--TRADEMARK TO JUSTIN TUNGGAL-->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cari & Rekomendasi Game - Games Dojo</title>
+<meta name="description" content="Cari game dengan filter lengkap atau jawab kuis singkat untuk rekomendasi game yang cocok untuk kamu.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23B75C2E%22/><text x=%2250%22 y=%2268%22 font-family=%22Arial%22 font-weight=%22700%22 font-size=%2258%22 fill=%22%23fff%22 text-anchor=%22middle%22>P</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="rekomendasi.html" class="brand">Games<span>Dojo</span></a>
+    <nav class="nav-links">
+      <a href="rekomendasi.html" class="active">Rekomendasi</a>
+    </nav>
+    <div class="nav-account" id="nav-account"></div>
+  </div>
+</header>
+
+<main class="container" style="padding-top:var(--sp-6);">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Koleksi game</div>
+      <h1 style="font-size:var(--fs-lg);margin:0;">Cari & rekomendasi game</h1>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--sp-3);margin-bottom:var(--sp-6);">
+    <div class="tab-pills" id="mode-tabs" style="margin-bottom:0;">
+      <button class="tab-pill" data-mode="cari" aria-pressed="true">Cari game</button>
+      <button class="tab-pill" data-mode="kuis" aria-pressed="false">Jawab kuis</button>
+      <button class="tab-pill" data-mode="hof" aria-pressed="false">Hall of Fame</button>
+    </div>
+    <div style="display:flex;gap:var(--sp-3);align-items:center;">
+      <button class="btn btn-outline btn-sm" id="quiz-restart" style="display:none;">Ulangi Kuis</button>
+      <a href="cara-kerja.html" class="btn btn-outline btn-sm">Cara kerja</a>
+    </div>
+  </div>
+
+  <section id="panel-cari">
+    <div class="match-layout">
+      <aside class="match-sidebar">
+        <div class="field" style="margin-bottom:var(--sp-5);">
+          <label for="f-sort">Urutkan</label>
+          <select id="f-sort" class="js-dd">
+            <option value="relevan">Paling relevan</option>
+            <option value="populer">Paling populer</option>
+            <option value="terbaru">Tahun terbaru</option>
+            <option value="az">Judul A-Z</option>
+          </select>
+        </div>
+
+        <div class="sidebar-section">
+          <div class="sidebar-section-head">Genre</div>
+          <div class="tab-pills" id="f-genre"></div>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-section-head">Perangkat</div>
+          <div class="tab-pills" id="f-platform"></div>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-section-head">Jumlah pemain</div>
+          <div class="tab-pills" id="f-pemain"></div>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-section-head">Mode main</div>
+          <div class="tab-pills" id="f-mode"></div>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-section-head">Gaya permainan</div>
+          <div class="tab-pills" id="f-gaya"></div>
+        </div>
+
+        <div class="sidebar-section">
+          <div class="sidebar-section-head">Tahun rilis</div>
+          <div class="year-range">
+            <input type="number" id="f-tahun-min" inputmode="numeric" aria-label="Tahun rilis dari" placeholder="Dari" min="1970" max="2100">
+            <span aria-hidden="true">–</span>
+            <input type="number" id="f-tahun-maks" inputmode="numeric" aria-label="Tahun rilis sampai" placeholder="Sampai" min="1970" max="2100">
+          </div>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-section-head">Rating usia</div>
+          <select id="f-rating" class="js-dd">
+            <option value="">Semua rating</option>
+            <option value="Semua Umur">Semua Umur</option>
+            <option value="7+">7+</option>
+            <option value="13+">13+</option>
+            <option value="16+">16+</option>
+            <option value="18+">18+</option>
+          </select>
+        </div>
+
+        <button class="btn btn-outline btn-sm btn-block" id="f-reset">Reset filter</button>
+      </aside>
+
+      <div class="match-content">
+        <div class="match-content-top">
+          <span id="f-count" style="color:var(--text-dim);font-size:var(--fs-sm);"></span>
+          <input type="text" id="f-search" aria-label="Cari judul, developer, publisher" placeholder="Cari judul, developer, publisher..." style="max-width:320px;">
+        </div>
+        <div class="game-grid" id="cari-grid">
+          <div class="skeleton" style="height:420px"></div>
+          <div class="skeleton" style="height:420px"></div>
+          <div class="skeleton" style="height:420px"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="panel-kuis" style="display:none;">
+    <div class="quiz-card">
+      <div id="quiz-area">
+        <div class="quiz-progress"><i id="quiz-bar" style="width:20%"></i></div>
+
+        <div class="quiz-step active" data-step="1">
+          <h3>Mau main sendiri atau ramai-ramai?</h3>
+          <div class="quiz-options" data-key="jumlah_pemain"></div>
+        </div>
+
+        <div class="quiz-step" data-step="2">
+          <h3>Genre favorit? (boleh pilih lebih dari satu)</h3>
+          <div class="quiz-options" data-key="genre"></div>
+        </div>
+
+        <div class="quiz-step" data-step="3">
+          <h3>Sedang cari suasana yang gimana?</h3>
+          <div class="quiz-options" data-key="gaya"></div>
+        </div>
+
+        <div class="quiz-step" data-step="4">
+          <h3>Lebih suka online atau offline?</h3>
+          <div class="quiz-options" data-key="mode_main"></div>
+        </div>
+
+        <div class="quiz-step" data-step="5">
+          <h3>Main di perangkat apa?</h3>
+          <div class="quiz-options" data-key="platform"></div>
+        </div>
+
+        <div style="margin-top:var(--sp-2);display:flex;justify-content:space-between;">
+          <button class="btn btn-outline btn-sm" id="quiz-back" disabled>Kembali</button>
+          <button class="btn btn-primary btn-sm" id="quiz-next">Lanjut</button>
+        </div>
+      </div>
+
+      <div id="quiz-result" style="display:none;">
+        <h3>Cocok buat kamu</h3>
+        <p id="quiz-result-note"></p>
+        <div class="game-grid" id="result-grid"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="panel-hof" style="display:none;">
+    <div class="section-head" style="margin-bottom:var(--sp-6);">
+      <div>
+        <div class="eyebrow">Paling disukai</div>
+        <h2 style="font-size:var(--fs-md);margin:0;">Hall of Fame</h2>
+      </div>
+      <span style="color:var(--text-dim);font-size:var(--fs-sm);">Diurutkan dari total jumlah suka semua pengunjung</span>
+    </div>
+    <div id="hof-list"></div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-bottom" style="border-top:none;">
+      <span>2026 Games Dojo. Seluruh hak cipta dimiliki oleh JDT.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="gm-scrim" id="gm-scrim" aria-hidden="true">
+  <div class="gm" id="gm" role="dialog" aria-modal="true" aria-labelledby="gm-title" tabindex="-1"></div>
+</div>
+
+<div id="toast-region" aria-live="polite"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabaseClient.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/rekomendasi.js"></script>
+</body>
+</html>

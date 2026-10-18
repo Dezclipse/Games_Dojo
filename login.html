@@ -1,0 +1,51 @@
+<!--TRADEMARK TO JUSTIN TUNGGAL-->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Masuk - Games Dojo</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="rekomendasi.html" class="brand">Games<span>Dojo</span></a>
+    <nav class="nav-links">
+      <a href="rekomendasi.html">Rekomendasi</a>
+    </nav>
+    <div class="nav-account" id="nav-account"></div>
+  </div>
+</header>
+
+<main class="auth-wrap">
+  <div class="card auth-card">
+    <h2 style="margin-top:0;">Masuk admin</h2>
+
+    <form id="form-login">
+      <div class="field">
+        <label for="li-email">Email</label>
+        <input type="email" id="li-email" required autocomplete="email">
+      </div>
+      <div class="field">
+        <label for="li-pass">Kata sandi</label>
+        <input type="password" id="li-pass" required autocomplete="current-password">
+        <div class="field-error" id="li-err"></div>
+      </div>
+      <button class="btn btn-primary btn-block" type="submit">Masuk</button>
+    </form>
+
+    <p class="auth-switch">Halaman ini cuma buat admin kelola koleksi game. Lihat rekomendasi game tidak perlu akun, <a href="rekomendasi.html">lihat di sini</a>.</p>
+  </div>
+</main>
+
+<div id="toast-region" aria-live="polite"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabaseClient.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

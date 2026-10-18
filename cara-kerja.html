@@ -1,0 +1,111 @@
+<!--TRADEMARK TO JUSTIN TUNGGAL-->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cara Kerja Rekomendasi - Games Dojo</title>
+<meta name="description" content="Penjelasan langkah demi langkah algoritma content-based filtering dan cosine similarity di balik rekomendasi game Games Dojo.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23B75C2E%22/><text x=%2250%22 y=%2268%22 font-family=%22Arial%22 font-weight=%22700%22 font-size=%2258%22 fill=%22%23fff%22 text-anchor=%22middle%22>P</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="rekomendasi.html" class="brand">Games<span>Dojo</span></a>
+    <nav class="nav-links">
+      <a href="rekomendasi.html">Rekomendasi</a>
+    </nav>
+    <div class="nav-account" id="nav-account"></div>
+  </div>
+</header>
+
+<main class="container" style="padding-top:var(--sp-6);">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Di balik layar</div>
+      <h1 style="font-size:var(--fs-lg);margin:0;">Cara kerja rekomendasi</h1>
+      <p style="margin-top:var(--sp-3);max-width:68ch;">
+        Setiap persentase "cocok" yang muncul di kartu game, baik di hasil kuis maupun
+        sambil kamu ngatur filter di "Cari game", datang dari algoritma yang sama, yaitu
+        <b style="color:var(--text);">content-based filtering</b> pakai
+        <b style="color:var(--text);">cosine similarity</b>. Berikut adalah langkah-langkahnya.
+      </p>
+    </div>
+    <a href="rekomendasi.html" class="btn btn-outline btn-sm">Kembali ke halaman rekomendasi</a>
+  </div>
+
+  <div class="steps-list">
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div>
+        <h3>Setiap game diubah jadi sebuah vektor biner</h3>
+        <p>Tiap game memiliki 4 kategori fitur, yaitu <b>genre</b>, <b>jumlah pemain</b>,
+          <b>gaya permainan</b>, dan <b>mode main</b>. Semua pilihan yang ada di keempat kategori itu digabung jadi
+          satu daftar panjang. Tiap game dicek, apakah memiliki kesamaan fitur atau tidak, jika ya maka akan memperoleh nilai
+          <code>1</code>, dan <code>0</code> kalau tidak. Hasilnya satu baris angka
+          0 dan 1 per game, itulah "vektornya".</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div>
+        <h3>Preferensi kamu diubah jadi vektor biner yang sama</h3>
+        <p>Jawaban kuis atau hasil filter genre, jumlah pemain, gaya permainan, dan mode main yang kamu pilih
+          diubah pakai cara yang sama. <code>1</code> buat fitur yang kamu pilih, <code>0</code> buat sisanya. Jadi preferensi
+          kamu dan tiap game sekarang menjadi satu baris angka 0 dan 1.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div>
+        <h3>Hitung kemiripan menggunakan cosine similarity</h3>
+        <p>Dua vektor tadi dianggap sebagai dua arah panah di ruang N-dimensi. Cosine similarity
+          mengukur sudut di antara keduanya, makin kecil sudutnya, makin
+          mirip hasilnya. Rumusnya:</p>
+        <div class="formula-box">cosine(A, B) = (A . B) / ( ||A|| x ||B|| )</div>
+        <p style="margin-top:var(--sp-2);font-size:var(--fs-sm);">
+          <code>A . B</code> adalah dot product, dikalikan untuk tiap pasangan angka kemudian
+          dijumlahkan. <code>||A||</code> dan <code>||B||</code> adalah panjang (magnitude)
+          tiap vektor.
+        </p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">4</div>
+      <div>
+        <h3>Urutkan berdasarkan skor tertinggi</h3>
+        <p>Setiap game akan dihitung skornya satu per satu kemudian diurutkan dari yang paling mirip.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-head" style="margin-top:var(--sp-10);">
+    <div>
+      <div class="eyebrow" id="contoh-eyebrow">Contoh hitungan</div>
+      <h2 style="font-size:var(--fs-md);margin:0;" id="contoh-judul">Preferensi kamu vs game yang direkomendasikan</h2>
+    </div>
+  </div>
+  <div id="contoh-loading" class="empty-state">Memuat contoh dari database...</div>
+  <div id="contoh-area" style="display:none;"></div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-bottom" style="border-top:none;">
+      <span>2026 Games Dojo. Seluruh hak cipta dimiliki oleh JDT.</span>
+    </div>
+  </div>
+</footer>
+
+<div id="toast-region" aria-live="polite"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabaseClient.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/cara-kerja.js"></script>
+</body>
+</html>
