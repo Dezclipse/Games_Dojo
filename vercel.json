@@ -9,5 +9,8 @@
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
       ]
     }
+  ],
+  "redirects": [
+    { "source": "/", "destination": "/rekomendasi", "permanent": false }
   ]
 }
